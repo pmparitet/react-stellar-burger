@@ -1,0 +1,32 @@
+.burgerConstructor {
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 80px 0 40px 0;
+}
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  height: 464px;
+}
+.li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 40px;
+}
+.cost {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
