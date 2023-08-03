@@ -21,9 +21,12 @@ function IngredientItem({data}) {
         <p className={`${styles.title} text text_type_main-default`}>{data.name}</p>
       </li>
 
-      <Modal visible={visible} closePopup={ () => setVisible(!visible) }>
-        <IngredientDetails data={data}/>
-      </Modal>
+      { visible && (
+        <Modal visible={visible} closePopup={ () => setVisible(!visible) }>
+          <IngredientDetails data={data}/>
+        </Modal>
+      )}
+
     </>
   );
 }

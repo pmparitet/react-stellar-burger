@@ -13,9 +13,13 @@ function App() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    getIngredients().then((res) => {
-      setData(res.data)
-    })
+    getIngredients()
+      .then((res) => {
+        setData(res.data)
+      })
+      .catch((err) => {
+        console.log('err', err)
+      })
   }, [])
 
   return (
@@ -28,10 +32,12 @@ function App() {
             <BurgerConstructor data={data} setVisible={ () => setVisible(!visible) }/>
           </main>
         }
+        { visible && (
+          <Modal closePopup={ () => setVisible(!visible) }>
+            <OrderDetails/>
+          </Modal>
+        )}
 
-        <Modal visible={visible} closePopup={ () => setVisible(!visible) }>
-          <OrderDetails/>
-        </Modal>
     </div>
   );
 }

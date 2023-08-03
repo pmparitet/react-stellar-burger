@@ -1,14 +1,13 @@
 import styles from './modal-overlay.module.css'
 import PropTypes from "prop-types";
 
-function ModalOverlay({visible, closePopup}) {
+function ModalOverlay({closePopup}) {
   return (
-    <div className={`${styles.overlay} ${visible ? styles.opened : ''}`} onClick={closePopup}></div>
+    <div className={`${styles.overlay} ${styles.opened}`} onClick={closePopup}></div>
   )
 }
 
 ModalOverlay.propTypes = {
-  visible: PropTypes.bool.isRequired,
   closePopup: PropTypes.func.isRequired,
 };
 

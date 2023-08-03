@@ -6,10 +6,8 @@ import ModalOverlay from '../modal-overlay/modal-overlay';
 import PropTypes from "prop-types";
 
 
-function Modal({children, visible, closePopup}) {
+function Modal({children, closePopup}) {
   useEffect(() => {
-    if(!visible) return;
-
     const closePopupEsc = event => {
       if(event.key === 'Escape') {
         closePopup()
@@ -20,12 +18,12 @@ function Modal({children, visible, closePopup}) {
 
     return () => document.removeEventListener('keydown', closePopupEsc);
 
-  }, [visible, closePopup])
+  }, [closePopup])
 
   return createPortal(
     <>
-      <ModalOverlay visible={visible} closePopup={closePopup}/>
-      <div className={`${styles.modal} ${visible ? styles.opened : ''}`}>
+      <ModalOverlay closePopup={closePopup}/>
+      <div className={`${styles.modal} ${styles.opened}`}>
         <button className={styles.btn} onClick={closePopup}>
           <CloseIcon type="primary"/>
         </button>
@@ -38,7 +36,6 @@ function Modal({children, visible, closePopup}) {
 Modal.propTypes = {
   children: PropTypes.node.isRequired,
   closePopup: PropTypes.func.isRequired,
-  visible: PropTypes.bool.isRequired,
 };
 
 export default Modal;

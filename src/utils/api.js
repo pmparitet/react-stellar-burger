@@ -10,9 +10,6 @@ async function getIngredients() {
         return Promise.reject(`Err ${res.status}`)
       }
     })
-    .catch((err) => {
-      console.log('err', err)
-    })
   )
 }
 
