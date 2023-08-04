@@ -1,15 +1,43 @@
+import { getIngredients } from "../../utils/api";
 import styles from "./app.module.css";
-import { data } from "../../utils/data";
+import AppHeader from "../app-header/app-header";
+import BurgerIngredients from "../burger-ingredients/burger-ingredients";
+import BurgerConstructor from "../burger-constructor/burger-constructor";
+import Modal from "../modal/modal";
+import OrderDetails from "../order-details/order-details";
+import { useEffect, useState } from "react";
+
 
 function App() {
+  const [data, setData] = useState([]);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    getIngredients()
+      .then((res) => {
+        setData(res.data)
+      })
+      .catch((err) => {
+        console.log('err', err)
+      })
+  }, [])
+
   return (
     <div className={styles.app}>
-      <pre style={{
-      	margin: "auto",
-      	fontSize: "1.5rem"
-      }}>
-      	Измените src/components/app/app.jsx и сохраните для обновления.
-      </pre>
+      	<AppHeader />
+        {
+          data.length > 0 &&
+          <main className={styles.main}>
+            <BurgerIngredients data={data} />
+            <BurgerConstructor data={data} setVisible={ () => setVisible(!visible) }/>
+          </main>
+        }
+        { visible && (
+          <Modal closePopup={ () => setVisible(!visible) }>
+            <OrderDetails/>
+          </Modal>
+        )}
+
     </div>
   );
 }
